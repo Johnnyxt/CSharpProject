@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Setting>
+  <WorkOrder>workOrder</WorkOrder>
+  <MainLogin>
+    <LoginName>Admin</LoginName>
+    <LoginPsd>password</LoginPsd>
+  </MainLogin>
+  <ServerLogin>
+    <ServerName>XZ-201512121106</ServerName>
+    <DbName>ProductDb</DbName>
+    <LoginName>sa</LoginName>
+    <LoginPsd>461764034</LoginPsd>
+  </ServerLogin>
+  <BasicInfo>
+    <OpName>张芳</OpName>
+    <Description>CM181003</Description>
+    <OpWorkId>1581218A</OpWorkId>
+    <Product>iODN</Product>
+    <OpTeam>M6</OpTeam>
+    <ProductLine>Access Network</ProductLine>
+    <Department>光器件制造部</Department>
+    <AteName>HUAWEI-JC-6</AteName>
+    <OperationSequence>1</OperationSequence>
+    <AteVersion>V1.0</AteVersion>
+    <SiteCode>MP2</SiteCode>
+    <TestSoftName>SmartX-U5100-ODN(AVIC)</TestSoftName>
+  </BasicInfo>
+</Setting>

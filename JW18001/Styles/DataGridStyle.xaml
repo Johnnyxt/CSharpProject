@@ -1,0 +1,969 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:jw18001="clr-namespace:JW18001">
+
+    <Style TargetType="TextBox">
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+    <Style TargetType="DataGrid">
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="AutoGenerateColumns" Value="False" />
+        <Setter Property="CanUserAddRows" Value="False" />
+        <Setter Property="CanUserResizeRows" Value="False" />
+        <Setter Property="CanUserResizeColumns" Value="False" />
+        <Setter Property="CanUserSortColumns" Value="False" />
+        <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="HeadersVisibility" Value="Column" />
+    </Style>
+    <SolidColorBrush x:Key="grdHeaderBorderBrush" Color="White" />
+    <SolidColorBrush x:Key="grdSelBkBrush" Color="#E89618" />
+    <SolidColorBrush x:Key="grdRowBkBrush" Color="#E4F2F2" />
+    <SolidColorBrush x:Key="grdAltRowBkBrush" Color="#F9FAFC" />
+    <SolidColorBrush x:Key="grdRowMouseOverBrush" Color="#FFF29D" />
+
+    <Style x:Key="tbEdit" TargetType="TextBox">
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="BorderBrush" Value="Navy" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="CheckBoxHeader" TargetType="CheckBox">
+        <Setter Property="BorderBrush" Value="Gold" />
+        <Setter Property="Foreground" Value="GreenYellow" />
+    </Style>
+    <Style x:Key="tbCell" TargetType="TextBox">
+        <Setter Property="Background" Value="#e6dbba" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="TextAlignment" Value="Center" />
+    </Style>
+    <LinearGradientBrush x:Key="grdHeaderBk" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="#519CB3" />
+        <GradientStop Offset="1" Color="#338AA5" />
+    </LinearGradientBrush>
+    <Style TargetType="DataGridColumnHeader">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="{StaticResource grdHeaderBk}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <!--<Setter Property="Padding" Value="5,0,3,0" />-->
+        <Setter Property="BorderBrush" Value="{StaticResource grdHeaderBorderBrush}" />
+        <Setter Property="BorderThickness" Value="0,0,1,0" />
+        <Setter Property="Height" Value="auto" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="FontFamily" Value="{DynamicResource appFont}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="BorderBrush" Value="Black" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="False" />
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="DataGridRow">
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background" Value="{StaticResource grdSelBkBrush}" />
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{StaticResource grdSelBkBrush}" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource grdRowMouseOverBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="DataGridCell">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Padding" Value="0" />
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background" Value="{StaticResource grdSelBkBrush}" />
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{StaticResource grdSelBkBrush}" />
+                <Setter Property="BorderThickness" Value="0" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="cmbColNormalLbStyle" TargetType="Label">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="BorderBrush" Value="Gold" />
+        <Setter Property="Foreground" Value="GreenYellow" />
+
+        <!--<Setter Property="Width" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridColumnHeader}, Path=ActualWidth}" />-->
+    </Style>
+    <Style x:Key="cmbColHeaderLbStyle"
+           BasedOn="{StaticResource cmbColNormalLbStyle}"
+           TargetType="Label">
+
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="BorderBrush" Value="Green" />
+    </Style>
+    <Style x:Key="cmbColRightLbStyle"
+           BasedOn="{StaticResource cmbColHeaderLbStyle}"
+           TargetType="Label">
+        <Setter Property="BorderBrush" Value="Gold" />
+        <Setter Property="BorderThickness" Value="0,1,1,0" />
+    </Style>
+    <Style x:Key="cmbColLeftLbStyle"
+           BasedOn="{StaticResource cmbColHeaderLbStyle}"
+           TargetType="Label">
+
+        <Setter Property="BorderThickness" Value="0,1,1,0" />
+    </Style>
+
+    <Style x:Key="SetWidth" />
+
+    <Label x:Key="DgHeaderTestIlWave"
+           Content="波长"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+    <Label x:Key="DgHeaderTestRlWave"
+           Content="波长"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+    <!--<Style x:Key="DgHeaderTestIl" TargetType="DataGridColumnHeader">
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <CheckBox Command="{Binding EnableIlTestCommand, Mode=TwoWay}" IsChecked="{Binding CheckAll, Mode=TwoWay}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+    <Style x:Key="DgHeaderTest" TargetType="DataGridColumnHeader">
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <CheckBox Command="{Binding EnableTestCommand,
+                                                RelativeSource={RelativeSource AncestorLevel=2,
+                                                                               Mode=FindAncestor,
+                                                                               AncestorType=UserControl}}"
+                              Content=""
+                              IsChecked="{Binding IsIlEnable,
+                                                  Mode=TwoWay}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="DgCellChannel">
+
+        <Label Height="25"
+               Margin="0,0,0,0"
+               Background="#e6dbba"
+               Content="{Binding Path=Channel}"
+               FontSize="14"
+               Foreground="Black"
+               Style="{StaticResource cmbColHeaderLbStyle}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="DgCellRefWave1">
+
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="13"
+                   Foreground="Black"
+                   Text="{Binding Path=Wave1Ref}" />
+    </DataTemplate>
+    <DataTemplate x:Key="DgCellRefWave2">
+
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="13"
+                   Foreground="Black"
+                   Text="{Binding Path=Wave2Ref}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="DgCellRefWave3">
+
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="13"
+                   Foreground="Black"
+                   Text="{Binding Path=Wave3Ref}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="DgCellRefWave4">
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="13"
+                   Foreground="Black"
+                   Text="{Binding Path=Wave4Ref}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="DgCellRefWave5">
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="13"
+                   Foreground="Black"
+                   Text="{Binding Path=Wave5Ref}" />
+    </DataTemplate>
+    <DataTemplate x:Key="DgCellRefWave6">
+
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="13"
+                   Foreground="Black"
+                   Text="{Binding Path=Wave6Ref}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="DgCellRefTime">
+
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="13"
+                   Foreground="Black"
+                   Text="{Binding Path=Time}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="DgCellRef">
+
+        <Button Margin="2"
+                Command="{Binding RefCommand}"
+                Content="REF"
+                FontSize="13"
+                Foreground="Black" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellColThreWave">
+
+        <Label Background="#e6dbba"
+               Content="{Binding Path=Wave}"
+               Foreground="Black"
+               Style="{StaticResource cmbColHeaderLbStyle}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColCellIlThre">
+        <Grid Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridColumn}, Path=ActualWidth}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0"
+                     Background="White"
+                     Style="{StaticResource tbCell}"
+                     Text="{Binding Path=IlLowerLimit,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    Mode=TwoWay}" />
+            <TextBox Grid.Column="1"
+                     Background="White"
+                     Style="{StaticResource tbCell}"
+                     Text="{Binding Path=IlUpperLimit,
+                                    UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="ColCellEditingIlThre">
+        <Grid Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridColumn}, Path=ActualWidth}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0"
+                     Style="{StaticResource tbEdit}"
+                     Text="{Binding Path=IlLowerLimit,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    Mode=TwoWay}" />
+            <TextBox Grid.Column="1"
+                     Style="{StaticResource tbEdit}"
+                     Text="{Binding Path=IlUpperLimit,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    Mode=TwoWay}" />
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="ColCellRlThre">
+        <Grid Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridColumn}, Path=ActualWidth}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0"
+                     Background="White"
+                     Style="{StaticResource tbCell}"
+                     Text="{Binding Path=RlLowerLimit,
+                                    UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Grid.Column="1"
+                     Background="White"
+                     Style="{StaticResource tbCell}"
+                     Text="{Binding Path=RlUpperLimit,
+                                    UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColCellEditingRlThre">
+        <Grid Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridColumn}, Path=ActualWidth}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0"
+                     Style="{StaticResource tbEdit}"
+                     Text="{Binding Path=RlLowerLimit,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    Mode=TwoWay}" />
+            <TextBox Grid.Column="1"
+                     Style="{StaticResource tbEdit}"
+                     Text="{Binding Path=RlUpperLimit,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    Mode=TwoWay}" />
+        </Grid>
+    </DataTemplate>
+
+    <Label x:Key="DgHeaderResult"
+           Content="结果"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+    <DataTemplate x:Key="DgCellResultDetail">
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Text="{Binding Result,
+                                  UpdateSourceTrigger=PropertyChanged}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="DgCellOpDetail">
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Text="{Binding Oper}" />
+    </DataTemplate>
+    <Label x:Key="DgHeaderWorkId"
+           Content="工号"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+    <DataTemplate x:Key="DgCellWorkIdDetail">
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Text="{Binding WorkId}" />
+    </DataTemplate>
+    <Label x:Key="DgHeaderIl"
+           Height="60"
+           Content="波长"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+
+    <Label x:Key="DgHeaderRefChannel"
+           Height="50"
+           Content="通道"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+
+    <Label x:Key="DgHeaderTestChannel"
+           Content="通道"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+
+    <Label x:Key="DgHeaderChannel"
+           Content="通道"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+
+    <Label x:Key="DgHeaderWaveDisplay"
+           Content="波长"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+
+    <DataTemplate x:Key="DgCellWaveDisplay">
+
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="13"
+                   Foreground="Black"
+                   Text="{Binding Path=OpmWave}" />
+    </DataTemplate>
+
+    <Label x:Key="DgHeaderDbmDisplay"
+           Content="Dbm"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+
+    <DataTemplate x:Key="DgCellDbmDisplay">
+
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="13"
+                   Foreground="Black"
+                   Text="{Binding Path=Dbm}" />
+    </DataTemplate>
+    <Label x:Key="DgHeaderDbDisplay"
+           Content="Db"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+
+    <DataTemplate x:Key="DgCellDbDisplay">
+
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="13"
+                   Foreground="Black"
+                   Text="{Binding Path=Db}" />
+    </DataTemplate>
+
+    <Label x:Key="DgHeaderTestIl"
+           Content="IL"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+
+    <DataTemplate x:Key="DgCellTestIl">
+
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="13"
+                   Foreground="Black"
+                   Text="{Binding Path=IlValue}" />
+    </DataTemplate>
+
+    <Label x:Key="DgHeaderTestPdl"
+           Content="PDL"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+
+    <DataTemplate x:Key="DgCellTestPdl">
+
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="13"
+                   Foreground="Black"
+                   Text="{Binding Path=PdlValue}" />
+    </DataTemplate>
+
+    <Label x:Key="DgHeaderTestRl"
+           Content="RL"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+
+    <DataTemplate x:Key="DgCellTestRl">
+
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="13"
+                   Foreground="Black"
+                   Text="{Binding Path=RlValue}" />
+    </DataTemplate>
+
+    <Grid x:Key="DgHeaderTestItem"
+          Width="180"
+          Height="60">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Label Grid.ColumnSpan="3"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               BorderBrush="Green"
+               Content="IL&amp;PDL"
+               Foreground="GreenYellow" />
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               Content="IL"
+               Style="{StaticResource cmbColRightLbStyle}" />
+        <Label Grid.Row="1"
+               Grid.Column="1"
+               Content="PDL"
+               Style="{StaticResource cmbColRightLbStyle}" />
+    </Grid>
+
+    <DataTemplate x:Key="DgCellTestItem">
+        <Grid Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridColumn}, Path=ActualWidth}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   HorizontalContentAlignment="Center"
+                   BorderBrush="Black"
+                   BorderThickness="0,0,1,0"
+                   Content="{Binding IlValue}" />
+            <!--<Rectangle Fill="#000" VerticalAlignment="Stretch" Margin="0" Width="1" />-->
+            <Label Grid.Column="1"
+                   HorizontalContentAlignment="Center"
+                   BorderBrush="Black"
+                   Content="{Binding PdlValue}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DgHeaderDisplay">
+
+        <Grid Width="160" Height="60">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.ColumnSpan="2"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Stretch"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"
+                   BorderBrush="Green"
+                   Content="{Binding ModelDisplay,
+                                     UpdateSourceTrigger=PropertyChanged}"
+                   Foreground="GreenYellow" />
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   Content="dBm"
+                   Style="{StaticResource cmbColRightLbStyle}" />
+            <Label Grid.Row="1"
+                   Grid.Column="1"
+                   Content="dB"
+                   Style="{StaticResource cmbColRightLbStyle}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DgCellDisplay">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   HorizontalContentAlignment="Center"
+                   BorderBrush="Black"
+                   BorderThickness="0,0,1,0"
+                   Content="{Binding OpmWave}"
+                   FontSize="13" />
+            <Label Grid.Column="1"
+                   HorizontalContentAlignment="Center"
+                   BorderBrush="Black"
+                   BorderThickness="0,0,1,0"
+                   Content="{Binding Dbm}"
+                   FontSize="13" />
+            <!--<Rectangle Fill="#000" VerticalAlignment="Stretch" Margin="0" Width="1" />-->
+            <Label Grid.Column="2"
+                   HorizontalContentAlignment="Center"
+                   Content="{Binding Db}"
+                   FontSize="13" />
+        </Grid>
+    </DataTemplate>
+    <Label x:Key="DgHeaderThreWave"
+           Height="50"
+           Content="波长"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+
+    <DataTemplate x:Key="DgCellThreWave">
+
+        <Label Height="25"
+               Margin="0,0,0,0"
+               Background="#e6dbba"
+               Content="{Binding Path=Wave}"
+               FontSize="14"
+               Foreground="Black"
+               Style="{StaticResource cmbColHeaderLbStyle}" />
+    </DataTemplate>
+
+    <Grid x:Key="DgHeaderIlThre"
+          Width="120"
+          Height="60">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Label Grid.ColumnSpan="2"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Stretch"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               BorderBrush="Green"
+               Content="IL"
+               Foreground="GreenYellow" />
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               Content="下限"
+               Style="{StaticResource cmbColRightLbStyle}" />
+        <Label Grid.Row="1"
+               Grid.Column="1"
+               Content="上限"
+               Style="{StaticResource cmbColRightLbStyle}" />
+    </Grid>
+
+    <DataTemplate x:Key="DgCellIlThre">
+        <Grid Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridColumn}, Path=ActualWidth}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0"
+                     Background="White"
+                     Style="{StaticResource tbCell}"
+                     Text="{Binding Path=IlLowerLimit,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    Mode=TwoWay}" />
+            <!--<Rectangle Fill="#000" VerticalAlignment="Stretch" Margin="0" Width="1" />-->
+            <TextBox Grid.Column="1"
+                     Background="White"
+                     Style="{StaticResource tbCell}"
+                     Text="{Binding Path=IlUpperLimit,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    Mode=TwoWay}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DgCellPdlThre">
+        <Grid Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridColumn}, Path=ActualWidth}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0"
+                     Background="White"
+                     Style="{StaticResource tbCell}"
+                     Text="{Binding Path=PdlLowerLimit,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    Mode=TwoWay}" />
+            <!--<Rectangle Fill="#000" VerticalAlignment="Stretch" Margin="0" Width="1" />-->
+            <TextBox Grid.Column="1"
+                     Background="White"
+                     Style="{StaticResource tbCell}"
+                     Text="{Binding Path=PdlUpperLimit,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    Mode=TwoWay}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DgCellRlThre">
+        <Grid Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridColumn}, Path=ActualWidth}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0"
+                     Background="White"
+                     Style="{StaticResource tbCell}"
+                     Text="{Binding Path=RlLowerLimit,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    Mode=TwoWay}" />
+            <!--<Rectangle Fill="#000" VerticalAlignment="Stretch" Margin="0" Width="1" />-->
+            <TextBox Grid.Column="1"
+                     Background="White"
+                     Style="{StaticResource tbCell}"
+                     Text="{Binding Path=RlUpperLimit,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    Mode=TwoWay}" />
+        </Grid>
+    </DataTemplate>
+
+    <Grid x:Key="DgHeaderRlThre"
+          Width="120"
+          Height="60">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Label Grid.ColumnSpan="2"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Stretch"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               BorderBrush="Green"
+               Content="RL"
+               Foreground="GreenYellow" />
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               Content="下限"
+               Style="{StaticResource cmbColRightLbStyle}" />
+        <Label Grid.Row="1"
+               Grid.Column="1"
+               Content="上限"
+               Style="{StaticResource cmbColRightLbStyle}" />
+    </Grid>
+
+    <Grid x:Key="DgHeaderPdlThre"
+          Width="120"
+          Height="60">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Label Grid.ColumnSpan="2"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Stretch"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               BorderBrush="Green"
+               Content="PDL"
+               Foreground="GreenYellow" />
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               Content="下限"
+               Style="{StaticResource cmbColRightLbStyle}" />
+        <Label Grid.Row="1"
+               Grid.Column="1"
+               Content="上限"
+               Style="{StaticResource cmbColRightLbStyle}" />
+    </Grid>
+    <Label x:Key="DgHeaderUserInfo"
+           Content="用户信息"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+    <DataTemplate x:Key="DgCellUserInfo">
+
+        <Label Background="#e6dbba"
+               Content="{Binding UserItem}"
+               Foreground="Black"
+               Style="{StaticResource cmbColHeaderLbStyle}" />
+    </DataTemplate>
+
+    <Label x:Key="DgHeaderUserPara"
+           Content="参数"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+    <DataTemplate x:Key="DgCellUserPara">
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Text="{Binding UserInfo}" />
+    </DataTemplate>
+    <Label x:Key="DgHeaderCh"
+           Content="通道"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+    <DataTemplate x:Key="DgCellCh">
+        <Label Background="#e6dbba"
+               Content="{Binding Channel}"
+               Foreground="Black"
+               Style="{StaticResource cmbColHeaderLbStyle}" />
+    </DataTemplate>
+    <Grid x:Key="DgHeaderWave1" Width="200">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Label Grid.ColumnSpan="3"
+               Content="1310nm"
+               Style="{StaticResource cmbColHeaderLbStyle}" />
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               Content="IL"
+               Style="{StaticResource cmbColRightLbStyle}" />
+        <Label Grid.Row="1"
+               Grid.Column="1"
+               Content="PDL"
+               Style="{StaticResource cmbColRightLbStyle}" />
+        <Label Grid.Row="1"
+               Grid.Column="2"
+               Content="RL"
+               Style="{StaticResource cmbColRightLbStyle}" />
+    </Grid>
+
+    <DataTemplate x:Key="DgCellWave1Detail">
+        <Grid Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridColumn}, Path=ActualWidth}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   HorizontalContentAlignment="Center"
+                   BorderBrush="Black"
+                   BorderThickness="0,0,1,0"
+                   Content="{Binding Wave1Il}" />
+            <!--<Rectangle Fill="#000" VerticalAlignment="Stretch" Margin="0" Width="1" />-->
+            <Label Grid.Column="1"
+                   HorizontalContentAlignment="Center"
+                   BorderBrush="Black"
+                   BorderThickness="0,0,1,0"
+                   Content="{Binding Wave1Pdl}" />
+            <Label Grid.Column="2"
+                   HorizontalContentAlignment="Center"
+                   BorderBrush="Black"
+                   Content="{Binding Wave1Rl}" />
+        </Grid>
+    </DataTemplate>
+    <Grid x:Key="DgHeaderWave2" Width="200">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Label Grid.ColumnSpan="3"
+               Content="1490nm"
+               Style="{StaticResource cmbColHeaderLbStyle}" />
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               Content="IL"
+               Style="{StaticResource cmbColRightLbStyle}" />
+        <Label Grid.Row="1"
+               Grid.Column="1"
+               Content="PDL"
+               Style="{StaticResource cmbColRightLbStyle}" />
+        <Label Grid.Row="1"
+               Grid.Column="2"
+               Content="RL"
+               Style="{StaticResource cmbColRightLbStyle}" />
+    </Grid>
+    <DataTemplate x:Key="DgCellWave2Detail">
+        <Grid Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridColumn}, Path=ActualWidth}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   HorizontalContentAlignment="Center"
+                   BorderBrush="Black"
+                   BorderThickness="0,0,1,0"
+                   Content="{Binding Wave2Il}" />
+            <!--<Rectangle Fill="#000" VerticalAlignment="Stretch" Margin="0" Width="1" />-->
+            <Label Grid.Column="1"
+                   HorizontalContentAlignment="Center"
+                   BorderBrush="Black"
+                   BorderThickness="0,0,1,0"
+                   Content="{Binding Wave2Pdl}" />
+            <Label Grid.Column="2"
+                   HorizontalContentAlignment="Center"
+                   BorderBrush="Black"
+                   Content="{Binding Wave2Rl}" />
+        </Grid>
+    </DataTemplate>
+    <Grid x:Key="DgHeaderWave3" Width="200">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Label Grid.ColumnSpan="3"
+               Content="1550nm"
+               Style="{StaticResource cmbColHeaderLbStyle}" />
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               Content="IL"
+               Style="{StaticResource cmbColRightLbStyle}" />
+        <Label Grid.Row="1"
+               Grid.Column="1"
+               Content="PDL"
+               Style="{StaticResource cmbColRightLbStyle}" />
+        <Label Grid.Row="1"
+               Grid.Column="2"
+               Content="RL"
+               Style="{StaticResource cmbColRightLbStyle}" />
+    </Grid>
+    <DataTemplate x:Key="DgCellWave3Detail">
+        <Grid Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridColumn}, Path=ActualWidth}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   HorizontalContentAlignment="Center"
+                   BorderBrush="Black"
+                   BorderThickness="0,0,1,0"
+                   Content="{Binding Wave3Il}" />
+            <!--<Rectangle Fill="#000" VerticalAlignment="Stretch" Margin="0" Width="1" />-->
+            <Label Grid.Column="1"
+                   HorizontalContentAlignment="Center"
+                   BorderBrush="Black"
+                   BorderThickness="0,0,1,0"
+                   Content="{Binding Wave3Pdl}" />
+            <Label Grid.Column="2"
+                   HorizontalContentAlignment="Center"
+                   BorderBrush="Black"
+                   Content="{Binding Wave3Rl}" />
+        </Grid>
+    </DataTemplate>
+    <Grid x:Key="DgHeaderWave4" Width="200">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Label Grid.ColumnSpan="3"
+               Content="1625nm"
+               Style="{StaticResource cmbColHeaderLbStyle}" />
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               Content="IL"
+               Style="{StaticResource cmbColRightLbStyle}" />
+        <Label Grid.Row="1"
+               Grid.Column="1"
+               Content="PDL"
+               Style="{StaticResource cmbColRightLbStyle}" />
+        <Label Grid.Row="1"
+               Grid.Column="2"
+               Content="RL"
+               Style="{StaticResource cmbColRightLbStyle}" />
+    </Grid>
+    <DataTemplate x:Key="DgCellWave4Detail">
+        <Grid Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridColumn}, Path=ActualWidth}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   HorizontalContentAlignment="Center"
+                   BorderBrush="Black"
+                   BorderThickness="0,0,1,0"
+                   Content="{Binding Wave4Il}" />
+            <!--<Rectangle Fill="#000" VerticalAlignment="Stretch" Margin="0" Width="1" />-->
+            <Label Grid.Column="1"
+                   HorizontalContentAlignment="Center"
+                   BorderBrush="Black"
+                   BorderThickness="0,0,1,0"
+                   Content="{Binding Wave4Pdl}" />
+            <Label Grid.Column="2"
+                   HorizontalContentAlignment="Center"
+                   BorderBrush="Black"
+                   Content="{Binding Wave4Rl}" />
+        </Grid>
+    </DataTemplate>
+
+    <Label x:Key="DgHeaderRefWave1"
+           Content="1310nm"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+    <Label x:Key="DgHeaderRefWave2"
+           Content="1490nm"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+    <Label x:Key="DgHeaderRefWave3"
+           Content="1550nm"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+    <Label x:Key="DgHeaderRefWave4"
+           Content="1625nm"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+    <Label x:Key="DgHeaderRefWave5"
+           Content="1550nm"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+    <Label x:Key="DgHeaderRefWave6"
+           Content="1625nm"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+    <Label x:Key="DgHeaderRefTime"
+           Content="时间"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+    <Label x:Key="DgHeaderRef"
+           Content="Ref"
+           Style="{StaticResource cmbColNormalLbStyle}" />
+    <Style x:Key="cmbColHeaderStyle"
+           BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
+           TargetType="{x:Type DataGridColumnHeader}" />
+</ResourceDictionary>

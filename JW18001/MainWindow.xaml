@@ -1,0 +1,134 @@
+﻿<Window x:Class="JW18001.MainLoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:JW18001"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="{Binding Title,
+                        UpdateSourceTrigger=PropertyChanged}"
+        Width="480"
+        Height="408"
+        FontFamily="Monaco"
+        FontSize="16"
+        IsEnabled="{Binding IsMainLoginFailed,
+                            Mode=OneWay}"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d">
+    <Window.InputBindings>
+        <KeyBinding Key="Enter" Command="{Binding MainLoginCommand}" />
+    </Window.InputBindings>
+    <DockPanel>
+        <Grid Height="80" DockPanel.Dock="Top">
+            <Label HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"
+                   Content="上海嘉慧光电子技术有限公司"
+                   FontFamily="Kaiti"
+                   FontSize="32"
+                   FontWeight="Bold">
+                <Label.Background>
+                    <SolidColorBrush Color="#FF46AFE9" />
+                </Label.Background>
+            </Label>
+        </Grid>
+        <Grid>
+            <StackPanel Margin="10" DockPanel.Dock="Bottom">
+
+                <StackPanel Width="300"
+                            Height="40"
+                            Orientation="Horizontal">
+                    <Label Width="80"
+                           Margin="2"
+                           HorizontalContentAlignment="Center"
+                           Content="串口号" />
+                    <ComboBox Width="80"
+                              Margin="5"
+                              ItemsSource="{Binding ObsPort}"
+                              SelectedItem="{Binding SelectedPort}" />
+                    <Button Width="80"
+                            Height="30"
+                            Margin="2"
+                            Command="{Binding ConnPortCommand}"
+                            Content="{Binding ConState}" />
+                </StackPanel>
+                <StackPanel Width="300"
+                            Height="40"
+                            Orientation="Horizontal">
+                    <Label Width="80"
+                           Margin="2"
+                           HorizontalContentAlignment="Center"
+                           Content="仪表版本" />
+
+                    <TextBox Width="170"
+                             Margin="2,5"
+                             IsReadOnly="True"
+                             Text="{Binding ProType,
+                                            UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+                <!--<StackPanel Width="300"
+                            Height="40"
+                            Orientation="Horizontal">
+                    <Label Width="80"
+                           Margin="2"
+                           HorizontalContentAlignment="Center"
+                           Content="选择通道" />
+
+                    <ComboBox Width="80"
+                              Margin="2,5"
+                              IsReadOnly="True"
+                              ItemsSource="{Binding ObsChannel}"
+                              SelectedIndex="{Binding SelChannel}" />
+                </StackPanel>-->
+                <StackPanel Width="300"
+                            Height="40"
+                            Orientation="Horizontal">
+                    <Label Width="80"
+                           Margin="2"
+                           HorizontalContentAlignment="Center"
+                           Content="登录名" />
+                    <TextBox Width="170"
+                             Margin="2,5"
+                             Text="{Binding MainLoginName,
+                                            UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+                <StackPanel Width="300"
+                            Height="40"
+                            Orientation="Horizontal">
+                    <Label Width="80"
+                           Margin="2"
+                           HorizontalContentAlignment="Center"
+                           Content="密码" />
+                    <PasswordBox Width="170"
+                                 Margin="2,5"
+                                 local:PasswordBoxHelper.Password="{Binding Path=MainLoginPsd,
+                                                                            Mode=TwoWay,
+                                                                            UpdateSourceTrigger=PropertyChanged}">
+                        <i:Interaction.Behaviors>
+                            <local:PasswordBoxBehavior />
+                        </i:Interaction.Behaviors>
+                    </PasswordBox>
+                </StackPanel>
+                <Grid Margin="25">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0"
+                            Width="120"
+                            Height="40"
+                            VerticalAlignment="Center"
+                            Command="{Binding MainLoginCommand}"
+                            Content="登录" />
+
+                    <Button Grid.Column="1"
+                            Width="120"
+                            Height="40"
+                            Command="{Binding CloseCommand}"
+                            Content="取消" />
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>

@@ -1,0 +1,189 @@
+﻿<Window x:Class="JW18001.Views.BasicInfoView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="基本信息"
+        Width="665"
+        Height="495"
+        Closed="BasicInfoView_OnClosed"
+        FontFamily="Microsoft YaHei UI"
+        FontSize="16"
+        IsEnabled="{Binding IsLogin,
+                            Mode=OneWay}"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d">
+    <Window.InputBindings>
+        <KeyBinding Key="Enter" Command="{Binding ConfirmCommand}" />
+    </Window.InputBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Height="100">
+            <Label Background="#FF46AFE9" />
+        </Grid>
+        <Grid Grid.Row="1"
+              Margin="10"
+              IsEnabled="{Binding IsBasicInfoViewEnable,
+                                  UpdateSourceTrigger=PropertyChanged}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="1.5*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Margin="5"
+                   HorizontalAlignment="Right"
+                   Content="操作员姓名：" />
+            <TextBox Grid.Row="0"
+                     Grid.Column="1"
+                     Margin="5"
+                     Text="{Binding OpName,
+                                    UpdateSourceTrigger=PropertyChanged}" />
+            <Label Grid.Row="0"
+                   Grid.Column="2"
+                   Margin="5"
+                   HorizontalAlignment="Right"
+                   Content="厂家标识：" />
+            <TextBox Grid.Row="0"
+                     Grid.Column="3"
+                     Margin="5"
+                     Text="{Binding Description,
+                                    UpdateSourceTrigger=PropertyChanged}" />
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   Margin="5"
+                   HorizontalAlignment="Right"
+                   Content="操作员工号：" />
+            <TextBox Grid.Row="1"
+                     Grid.Column="1"
+                     Margin="5"
+                     Text="{Binding OpWorkId,
+                                    UpdateSourceTrigger=PropertyChanged}" />
+            <Label Grid.Row="1"
+                   Grid.Column="2"
+                   Margin="5"
+                   HorizontalAlignment="Right"
+                   Content="产品类别：" />
+            <TextBox Grid.Row="1"
+                     Grid.Column="3"
+                     Margin="5"
+                     Text="{Binding Product,
+                                    UpdateSourceTrigger=PropertyChanged}" />
+            <Label Grid.Row="2"
+                   Grid.Column="0"
+                   Margin="5"
+                   HorizontalAlignment="Right"
+                   Content="操作员班组：" />
+            <TextBox Grid.Row="2"
+                     Grid.Column="1"
+                     Margin="5"
+                     Text="{Binding OpTeam,
+                                    UpdateSourceTrigger=PropertyChanged}" />
+            <Label Grid.Row="2"
+                   Grid.Column="2"
+                   Margin="5"
+                   HorizontalAlignment="Right"
+                   Content="产品线：" />
+            <TextBox Grid.Row="2"
+                     Grid.Column="3"
+                     Margin="5"
+                     Text="{Binding ProductLine,
+                                    UpdateSourceTrigger=PropertyChanged}" />
+            <Label Grid.Row="3"
+                   Grid.Column="0"
+                   Margin="5"
+                   HorizontalAlignment="Right"
+                   Content="主制部门：" />
+            <TextBox Grid.Row="3"
+                     Grid.Column="1"
+                     Margin="5"
+                     Text="{Binding Department,
+                                    UpdateSourceTrigger=PropertyChanged}" />
+            <Label Grid.Row="3"
+                   Grid.Column="2"
+                   Margin="5"
+                   HorizontalAlignment="Right"
+                   Content="测试设备编号：" />
+            <TextBox Grid.Row="3"
+                     Grid.Column="3"
+                     Margin="5"
+                     Text="{Binding AteName,
+                                    UpdateSourceTrigger=PropertyChanged}" />
+            <Label Grid.Row="4"
+                   Grid.Column="0"
+                   Margin="5"
+                   HorizontalAlignment="Right"
+                   Content="测试工序：" />
+            <TextBox Grid.Row="4"
+                     Grid.Column="1"
+                     Margin="5"
+                     Text="{Binding OperationSequence,
+                                    UpdateSourceTrigger=PropertyChanged}" />
+            <Label Grid.Row="4"
+                   Grid.Column="2"
+                   Margin="5"
+                   HorizontalAlignment="Right"
+                   Content="测试设备版本：" />
+            <TextBox Grid.Row="4"
+                     Grid.Column="3"
+                     Margin="5"
+                     Text="{Binding AteVersion,
+                                    UpdateSourceTrigger=PropertyChanged}" />
+            <Label Grid.Row="5"
+                   Grid.Column="0"
+                   Margin="5"
+                   HorizontalAlignment="Right"
+                   Content="测试工位：" />
+            <TextBox Grid.Row="5"
+                     Grid.Column="1"
+                     Margin="5"
+                     Text="{Binding SiteCode,
+                                    UpdateSourceTrigger=PropertyChanged}" />
+            <Label Grid.Row="5"
+                   Grid.Column="2"
+                   Margin="5"
+                   HorizontalAlignment="Right"
+                   Content="测试软件名称：" />
+            <TextBox Grid.Row="5"
+                     Grid.Column="3"
+                     Margin="5"
+                     Text="{Binding TestSoftName,
+                                    UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="25">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    Width="120"
+                    Height="40"
+                    VerticalAlignment="Center"
+                    Command="{Binding ConfirmCommand}"
+                    Content="登录" />
+
+            <Button Grid.Column="1"
+                    Width="120"
+                    Height="40"
+                    Command="{Binding CloseCommand}"
+                    Content="取消" />
+        </Grid>
+    </Grid>
+</Window>
